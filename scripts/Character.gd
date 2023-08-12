@@ -24,28 +24,29 @@ func _ready():
 var pressed = []
 
 func _input(event):
-	if event.is_action_pressed("moveright"):
-		pressed.append("moveright")
-	elif event.is_action_pressed("moveleft"):
-		pressed.append("moveleft")
-	elif event.is_action_pressed("moveup"):
-		pressed.append("moveup")
-	elif event.is_action_pressed("movedown"):
-		pressed.append("movedown")
+	if event.as_text() in ["W", "A", "S", "D"]:
+		if event.is_action_pressed("moveright"):
+			pressed.append("moveright")
+		elif event.is_action_pressed("moveleft"):
+			pressed.append("moveleft")
+		elif event.is_action_pressed("moveup"):
+			pressed.append("moveup")
+		elif event.is_action_pressed("movedown"):
+			pressed.append("movedown")
 
-	if event.is_action_released("moveright"):
-		pressed.erase("moveright")
-	elif event.is_action_released("moveleft"):
-		pressed.erase("moveleft")
-	elif event.is_action_released("moveup"):
-		pressed.erase("moveup")
-	elif event.is_action_released("movedown"):
-		pressed.erase("movedown")
+		if event.is_action_released("moveright"):
+			pressed.erase("moveright")
+		elif event.is_action_released("moveleft"):
+			pressed.erase("moveleft")
+		elif event.is_action_released("moveup"):
+			pressed.erase("moveup")
+		elif event.is_action_released("movedown"):
+			pressed.erase("movedown")
 
-	if len(pressed) > 0:
-		movement_direction = pressed[0]
-	else:
-		movement_direction = "still"
+		if len(pressed) > 0:
+			movement_direction = pressed[-1]
+		else:
+			movement_direction = "still"
 
 func _process(_delta):
 	if moving:
