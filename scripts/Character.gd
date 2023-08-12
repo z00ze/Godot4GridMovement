@@ -13,29 +13,38 @@ var inputs = {
 	"still": Vector2.ZERO
 }
 
+
+
 @onready var ray = $PointingRay
 
 func _ready():
 	#position = position.snapped(Vector2.ONE * tile_size)
 	$CharacterSprite/AnimationPlayer.speed_scale = speed
 
+var pressed = []
+
 func _input(event):
 	if event.is_action_pressed("moveright"):
-		movement_direction = "moveright"
+		pressed.append("moveright")
 	elif event.is_action_pressed("moveleft"):
-		movement_direction = "moveleft"
+		pressed.append("moveleft")
 	elif event.is_action_pressed("moveup"):
-		movement_direction = "moveup"
+		pressed.append("moveup")
 	elif event.is_action_pressed("movedown"):
-		movement_direction = "movedown"
+		pressed.append("movedown")
 
 	if event.is_action_released("moveright"):
-		movement_direction = "still"
+		pressed.erase("moveright")
 	elif event.is_action_released("moveleft"):
-		movement_direction = "still"
+		pressed.erase("moveleft")
 	elif event.is_action_released("moveup"):
-		movement_direction = "still"
+		pressed.erase("moveup")
 	elif event.is_action_released("movedown"):
+		pressed.erase("movedown")
+
+	if len(pressed) > 0:
+		movement_direction = pressed[0]
+	else:
 		movement_direction = "still"
 
 func _process(_delta):
