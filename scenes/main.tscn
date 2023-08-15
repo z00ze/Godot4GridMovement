@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://di3jfrboebmws"]
+[gd_scene load_steps=19 format=3 uid="uid://di3jfrboebmws"]
 
 [ext_resource type="Texture2D" uid="uid://b2g1q3cy5d6pk" path="res://assets/tilesets/floortileset.png" id="1_00j23"]
 [ext_resource type="Texture2D" uid="uid://cwgvd2gm3mkay" path="res://assets/character/rpg-character_transparent.png" id="2_nksxc"]
 [ext_resource type="Script" path="res://scripts/Character.gd" id="2_s1ruk"]
 [ext_resource type="Script" path="res://scripts/Grid.gd" id="3_x3dgk"]
+[ext_resource type="Texture2D" uid="uid://cyhy1o8ra1b7k" path="res://assets/highlight.png" id="5_38jlr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1yaul"]
 texture = ExtResource("1_00j23")
@@ -206,8 +207,21 @@ shape = SubResource("RectangleShape2D_gb0eh")
 position = Vector2(16, 128)
 shape = SubResource("RectangleShape2D_x22e4")
 
+[node name="Grid" type="Node2D" parent="."]
+z_index = 1
+z_as_relative = false
+script = ExtResource("3_x3dgk")
+
+[node name="Highlight" type="Sprite2D" parent="."]
+z_as_relative = false
+position = Vector2(192, 64)
+texture = ExtResource("5_38jlr")
+centered = false
+
 [node name="Character" type="Area2D" parent="."]
-position = Vector2(64, 64)
+z_index = 2
+z_as_relative = false
+position = Vector2(192, 64)
 script = ExtResource("2_s1ruk")
 
 [node name="PointingRay" type="RayCast2D" parent="Character"]
@@ -220,8 +234,7 @@ position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_fthmr")
 
 [node name="CharacterSprite" type="Sprite2D" parent="Character"]
-position = Vector2(8, -8)
-scale = Vector2(0.5, 0.5)
+position = Vector2(0, -40)
 texture = ExtResource("2_nksxc")
 centered = false
 hframes = 4
@@ -236,9 +249,6 @@ libraries = {
 [node name="TransformCamera" type="RemoteTransform2D" parent="Character"]
 remote_path = NodePath("../../Camera")
 
-[node name="Grid" type="Node2D" parent="."]
-script = ExtResource("3_x3dgk")
-
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(64, 64)
-zoom = Vector2(2, 2)
+position = Vector2(192, 64)
+zoom = Vector2(3, 3)

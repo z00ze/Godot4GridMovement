@@ -58,6 +58,9 @@ func move(dir):
 		ray.target_position = inputs[dir] * tile_size
 		ray.force_raycast_update()
 		if !ray.is_colliding():
+			
+			$"../Highlight".position = position + inputs[dir] * tile_size
+			
 			var movementTween = get_tree().create_tween()
 			movementTween.tween_property(self, "position", position + inputs[dir] * tile_size, 0.8 / speed).set_trans(Tween.TRANS_LINEAR)
 			moving = true
